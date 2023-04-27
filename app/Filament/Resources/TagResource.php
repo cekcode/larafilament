@@ -27,7 +27,7 @@ class TagResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-hashtag';
 
     protected static ?string $navigationGroup = 'Blog';
 
