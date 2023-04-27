@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Filament\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Filament\Facades\Filament;
 use Filament\Navigation\UserMenuItem;
+use Illuminate\Support\Facades\Auth;
 
 class FilamentServiceProvider extends ServiceProvider
 {
@@ -21,14 +23,17 @@ class FilamentServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
         Filament::serving(function () {
-            Filament::registerUserMenuItems([
-                UserMenuItem::make()
-                    ->label('Settings')
-                    ->url(UserResource::getUrl())
-                    ->icon('heroicon-s-cog'),
-                // ...
-            ]);
+            if (Auth::check() && Auth::user()->hasRole('admin')) {
+                Filament::registerUserMenuItems([
+                    UserMenuItem::make()
+                        ->label('Settings')
+                        ->url(UserResource::getUrl())
+                        ->icon('heroicon-s-cog'),
+                    // ...
+                ]);
+            }
         });
     }
 }

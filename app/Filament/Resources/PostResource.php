@@ -53,7 +53,10 @@ class PostResource extends Resource
                         TextInput::make('slug')->required(),
                         SpatieMediaLibraryFileUpload::make('cover')->required(),
                         RichEditor::make('content')->required(),
-                        Toggle::make('status')
+                        Toggle::make('status'),
+                        Select::make('tag')
+                            ->multiple()
+                            ->relationship('tags', 'name')->preload()
                     ])
             ]);
     }
@@ -93,7 +96,7 @@ class PostResource extends Resource
     public static function getRelations(): array
     {
         return [
-            TagsRelationManager::class
+            // TagsRelationManager::class
         ];
     }
 

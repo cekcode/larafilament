@@ -7,6 +7,7 @@ use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Page;
 use Filament\Resources\Form;
@@ -75,7 +76,8 @@ class UserResource extends Resource
                     }
                 ),
                 TextColumn::make('name')->limit(50)->sortable()->searchable(),
-                TextColumn::make('email')->limit(50)->searchable()
+                TextColumn::make('email')->limit(50)->searchable(),
+                TextColumn::make('roles.name')
             ])
             ->filters([
                 //
