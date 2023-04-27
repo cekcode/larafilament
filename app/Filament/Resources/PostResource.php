@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use stdClass;
 
 class PostResource extends Resource
@@ -73,7 +75,11 @@ class PostResource extends Resource
                 ToggleColumn::make('status')
             ])
             ->filters([
-                //
+                Filter::make('publish')
+                    ->query(fn (Builder $query): Builder => $query->where('status', true)),
+                Filter::make('draft')
+                    ->query(fn (Builder $query): Builder => $query->where('status', false)),
+                SelectFilter::make('Category')->relationship('category', 'name')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
