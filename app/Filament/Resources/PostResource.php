@@ -67,7 +67,7 @@ class PostResource extends Resource
                         );
                     }
                 ),
-                TextColumn::make('title')->limit(50)->sortable(),
+                TextColumn::make('title')->limit(50)->sortable()->searchable(),
                 TextColumn::make('category.name')->limit(50),
                 SpatieMediaLibraryImageColumn::make('cover'),
                 ToggleColumn::make('status')
