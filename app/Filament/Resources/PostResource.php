@@ -3,13 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
-use App\Filament\Resources\PostResource\RelationManagers;
 use App\Filament\Resources\PostResource\RelationManagers\TagsRelationManager;
+use App\Filament\Resources\PostResource\Widgets\PostOverview;
 use App\Models\Post;
 use Closure;
-use Filament\Forms;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -23,7 +21,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Tables\Filters\Filter;
@@ -33,6 +30,8 @@ use stdClass;
 class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
+
+    protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -102,6 +101,13 @@ class PostResource extends Resource
             'index' => Pages\ListPosts::route('/'),
             'create' => Pages\CreatePost::route('/create'),
             'edit' => Pages\EditPost::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            PostOverview::class,
         ];
     }
 }
