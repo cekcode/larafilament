@@ -8,6 +8,7 @@ use App\Models\Post;
 use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -22,6 +23,8 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use stdClass;
 
 class PostResource extends Resource
@@ -44,6 +47,7 @@ class PostResource extends Resource
                                 $set('slug', Str::slug($state));
                             })->required(),
                         TextInput::make('slug')->required(),
+                        SpatieMediaLibraryFileUpload::make('cover')->required(),
                         RichEditor::make('content')->required(),
                         Toggle::make('status')
                     ])
@@ -64,6 +68,7 @@ class PostResource extends Resource
                 ),
                 TextColumn::make('title')->limit(50)->sortable(),
                 TextColumn::make('category.name')->limit(50),
+                SpatieMediaLibraryImageColumn::make('cover'),
                 ToggleColumn::make('status')
             ])
             ->filters([
