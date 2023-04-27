@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Providers;
+
+use App\Filament\Resources\UserResource;
+use Illuminate\Support\ServiceProvider;
+use Filament\Facades\Filament;
+use Filament\Navigation\UserMenuItem;
+
+class FilamentServiceProvider extends ServiceProvider
+{
+    /**
+     * Register services.
+     */
+    public function register(): void
+    {
+    }
+
+    /**
+     * Bootstrap services.
+     */
+    public function boot(): void
+    {
+        Filament::serving(function () {
+            Filament::registerUserMenuItems([
+                UserMenuItem::make()
+                    ->label('Settings')
+                    ->url(UserResource::getUrl())
+                    ->icon('heroicon-s-cog'),
+                // ...
+            ]);
+        });
+    }
+}
