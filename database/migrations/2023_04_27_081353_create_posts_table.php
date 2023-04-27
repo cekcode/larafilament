@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained()->onDelete('casade');
+            $table->unsignedBigInteger('category_id');
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('content');
             $table->boolean('status')->default(false);
             $table->timestamps();
+            //relationship category
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

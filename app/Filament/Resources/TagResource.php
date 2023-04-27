@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TagResource\Pages;
 use App\Filament\Resources\TagResource\RelationManagers;
+use App\Filament\Resources\TagResource\RelationManagers\PostsRelationManager;
 use App\Models\Tag;
 use Closure;
 use Filament\Forms;
@@ -71,7 +72,7 @@ class TagResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PostsRelationManager::class
         ];
     }
 
