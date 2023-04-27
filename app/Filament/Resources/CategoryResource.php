@@ -15,8 +15,10 @@ use Illuminate\Support\Str;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use stdClass;
 
 class CategoryResource extends Resource
 {
@@ -45,7 +47,14 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
+                TextColumn::make('No')->getStateUsing(
+                    static function (stdClass $rowLoop, HasTable $livewire): string {
+                        return (string) ($rowLoop->iteration +
+                            ($livewire->tableRecordsPerPage * ($livewire->page - 1
+                            ))
+                        );
+                    }
+                ),
                 TextColumn::make('name')->limit(50)->sortable(),
                 TextColumn::make('slug')->limit(50)
             ])
