@@ -76,7 +76,7 @@ class PostResource extends Resource
                 TextColumn::make('title')->limit(50)->sortable()->searchable(),
                 TextColumn::make('category.name')->limit(50),
                 SpatieMediaLibraryImageColumn::make('cover'),
-                ToggleColumn::make('status'),
+                ToggleColumn::make('status')->disabled(!auth()->user()->hasPermissionTo('Update Blog')),
                 TextColumn::make('updated_at')->limit(50)->sortable()->searchable()
             ])
             ->filters([
