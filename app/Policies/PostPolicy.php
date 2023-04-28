@@ -13,10 +13,11 @@ class PostPolicy
      */
     public function viewAny(User $user): bool
     {
-        if ($user->hasRole(['admin', 'editor']) && $user->hasPermissionTo('Create Blog')) {
+        if ($user->hasRole('admin') || $user->hasRole('editor') && $user->hasPermissionTo('View Blog')) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -24,10 +25,11 @@ class PostPolicy
      */
     public function view(User $user, Post $post): bool
     {
-        if ($user->hasRole(['admin', 'editor']) && $user->hasPermissionTo('Create Blog')) {
+        if ($user->hasRole('admin') || $user->hasRole('editor') && $user->hasPermissionTo('View Blog')) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -35,7 +37,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        if ($user->hasRole(['admin', 'editor']) && $user->hasPermissionTo('Create Blog')) {
+        if ($user->hasRole('admin') || $user->hasRole('editor') && $user->hasPermissionTo('Create Blog')) {
             return true;
         }
         return false;
@@ -46,10 +48,11 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        if ($user->hasRole(['admin', 'editor']) && $user->hasPermissionTo('Create Blog')) {
+        if ($user->hasRole('admin') || $user->hasRole('editor') && $user->hasPermissionTo('Update Blog')) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -57,10 +60,11 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        if ($user->hasRole(['admin', 'editor']) && $user->hasPermissionTo('Delete Blog')) {
+        if ($user->hasRole('admin') || $user->hasRole('editor') && $user->hasPermissionTo('Delete Blog')) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -68,10 +72,11 @@ class PostPolicy
      */
     public function restore(User $user, Post $post): bool
     {
-        if ($user->hasRole(['admin', 'editor']) && $user->hasPermissionTo('Delete Blog')) {
+        if ($user->hasRole('admin') || $user->hasRole('editor') && $user->hasPermissionTo('Delete Blog')) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -79,9 +84,10 @@ class PostPolicy
      */
     public function forceDelete(User $user, Post $post): bool
     {
-        if ($user->hasRole(['admin', 'editor']) && $user->hasPermissionTo('Delete Blog')) {
+        if ($user->hasRole('admin') || $user->hasRole('editor') && $user->hasPermissionTo('Delete Blog')) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 }

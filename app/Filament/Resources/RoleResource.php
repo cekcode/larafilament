@@ -35,13 +35,11 @@ class RoleResource extends Resource
                 Card::make()
                     ->schema([
                         TextInput::make('name')
+                            ->disabled()
                             ->minLength(3)
                             ->maxLength(100)
                             ->required()
-                            ->unique(ignoreRecord: true),
-                        Select::make('permissions')
-                            ->multiple()
-                            ->relationship('permissions', 'name')->preload()
+                            ->unique(ignoreRecord: true)
                     ])
             ]);
     }

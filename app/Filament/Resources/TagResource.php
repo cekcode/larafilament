@@ -60,7 +60,7 @@ class TagResource extends Resource
                     }
                 ),
                 TextColumn::make('name')->limit(50)->sortable()->searchable(),
-                TextColumn::make('slug')->limit(50)
+                TextColumn::make('updated_at')->limit(50)->sortable()->searchable()
             ])
             ->filters([
                 //
@@ -69,7 +69,7 @@ class TagResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()->hidden(!auth()->user()->hasRole('admin')),
             ]);
     }
 

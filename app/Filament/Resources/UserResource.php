@@ -84,7 +84,8 @@ class UserResource extends Resource
                 ),
                 TextColumn::make('name')->limit(50)->sortable()->searchable(),
                 TextColumn::make('email')->limit(50)->searchable(),
-                TextColumn::make('roles.name')
+                TextColumn::make('roles.name'),
+                TextColumn::make('updated_at')->limit(50)->sortable()->searchable()
             ])
             ->filters([
                 //

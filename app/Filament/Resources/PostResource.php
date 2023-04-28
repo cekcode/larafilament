@@ -76,7 +76,8 @@ class PostResource extends Resource
                 TextColumn::make('title')->limit(50)->sortable()->searchable(),
                 TextColumn::make('category.name')->limit(50),
                 SpatieMediaLibraryImageColumn::make('cover'),
-                ToggleColumn::make('status')
+                ToggleColumn::make('status'),
+                TextColumn::make('updated_at')->limit(50)->sortable()->searchable()
             ])
             ->filters([
                 Filter::make('publish')
@@ -89,7 +90,7 @@ class PostResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()->hidden(!auth()->user()->hasRole('admin')),
             ]);
     }
 

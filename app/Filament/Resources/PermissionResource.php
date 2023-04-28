@@ -33,6 +33,7 @@ class PermissionResource extends Resource
                 Card::make()
                     ->schema([
                         TextInput::make('name')
+                            // ->disabled()
                             ->minLength(3)
                             ->maxLength(100)
                             ->required()
