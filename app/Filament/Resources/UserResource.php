@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\UserResource\RelationManagers\PermissionsRelationManager;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
@@ -58,7 +59,13 @@ class UserResource extends Resource
                         ->password()
                         ->required(fn (Page $livewire): bool => $livewire instanceof CreateRecord)
                         ->minLength(8)
-                        ->dehydrated(false)
+                        ->dehydrated(false),
+                    Select::make('roles')
+                        ->multiple()
+                        ->relationship('roles', 'name')->preload(),
+                    Select::make('permission')
+                        ->multiple()
+                        ->relationship('permissions', 'name')->preload()
                 ])
             ]);
     }

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RoleResource\Pages;
 use App\Filament\Resources\RoleResource\RelationManagers;
 use App\Filament\Resources\RoleResource\RelationManagers\UsersRelationManager;
+use App\Models\Role;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
@@ -18,7 +19,6 @@ use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use stdClass;
-use Spatie\Permission\Models\Role;
 
 class RoleResource extends Resource
 {

@@ -3,7 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PermissionResource\Pages;
-use App\Filament\Resources\PermissionResource\RelationManagers;
+use App\Filament\Resources\PermissionResource\RelationManagers\UsersRelationManager;
+use App\Models\Permission;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TextInput;
@@ -15,7 +16,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Spatie\Permission\Models\Permission;
 use stdClass;
 
 class PermissionResource extends Resource
@@ -69,7 +69,7 @@ class PermissionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            UsersRelationManager::class
         ];
     }
 
