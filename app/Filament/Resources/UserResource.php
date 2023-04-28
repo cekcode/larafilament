@@ -29,7 +29,7 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    protected static ?string $navigationGroup = 'Setting';
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
@@ -62,10 +62,10 @@ class UserResource extends Resource
                         ->dehydrated(false),
                     Select::make('roles')
                         ->multiple()
-                        ->relationship('roles', 'name')->preload(),
+                        ->relationship('roles', 'name')->preload()->hidden(!auth()->user()->hasRole('admin')),
                     Select::make('permission')
                         ->multiple()
-                        ->relationship('permissions', 'name')->preload()
+                        ->relationship('permissions', 'name')->preload()->hidden(!auth()->user()->hasRole('admin'))
                 ])
             ]);
     }
